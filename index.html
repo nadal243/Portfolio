@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nadal NGAKI — Ingénieur logiciel embarqué | Électronique &amp; Informatique</title>
+  <meta name="description" content="Portfolio d'un étudiant ingénieur Polytech Sorbonne (Électronique et Informatique), apprenti ingénieur logiciel embarqué chez CLAAS : projets, parcours, compétences et contact.">
+  <meta name="theme-color" content="#0D1117">
+  <!-- Aperçu de partage : remplacez l'URL et l'image par les vôtres -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nadal NGAKI — Ingénieur logiciel embarqué">
+  <meta property="og:description" content="Électronique, systèmes embarqués et logiciel : projets et parcours.">
+  <meta property="og:image" content="assets/images/og-preview.png">
+  <!-- Polices : seule dépendance externe, avec polices de repli dans le CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <canvas class="bg-canvas" data-bg aria-hidden="true"></canvas>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Accueil"><img src="assets/icons/logo.svg" alt="" width="26" height="26"><span data-brand>Nadal NGAKI</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="visually-hidden">Menu</span><span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Navigation principale">
+        <ul>
+          <li><a href="#experience">Expérience</a></li>
+          <li><a href="#parcours">Parcours</a></li>
+          <li><a href="#projets">Projets</a></li>
+          <li><a href="#initiatives">Initiatives</a></li>
+          <li><a href="#competences">Compétences</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a class="btn btn-small" href="assets/cv.pdf" download data-cv>Télécharger le CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="hero-context">Etudiant en Electronique et Informatique · apprenti ingénieur logiciel embarqué</p>
+          <h2><span data-fullname>Nadal NGAKI</span></h2>
+          <p class="hero-title">Ingénieur logiciel embarqué | Electronique</p>
+          <p class="hero-pitch">Étudiant ingénieur en Électronique et Informatique, je construis mon expertise à l'interface du hardware et du software pour développer des systèmes embarqués innovants</p>
+          <div class="hero-actions">
+            <a class="btn" href="#projets">Découvrir mes projets</a>
+            <a class="btn btn-ghost" href="assets/cv.pdf" download data-cv>Télécharger mon CV</a>
+          </div>
+          <p class="cv-status" role="status" data-cv-status></p>
+          <ul class="social-links" aria-label="Réseaux">
+            <li><a href="#" data-link="github" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="#" data-link="linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          </ul>
+        </div>
+        <figure class="terminal" aria-label="Moniteur série décoratif">
+          <figcaption class="terminal-bar"><span>/dev/ttyUSB0 · 115200 8N1</span><span class="terminal-note">démo décorative</span></figcaption>
+          <pre class="terminal-body" aria-hidden="true" data-terminal></pre>
+        </figure>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="container">
+        <h2>Expérience professionnelle</h2>
+        <ol class="timeline" data-experiences></ol>
+      </div>
+    </section>
+
+    <section id="parcours" class="section section-alt">
+      <div class="container">
+        <h2>Parcours académique</h2>
+        <div class="education" data-education></div>
+      </div>
+    </section>
+
+    <section id="projets" class="section">
+      <div class="container">
+        <h2>Projets techniques</h2>
+        <div class="filters" role="group" aria-label="Filtrer les projets par catégorie" data-filters></div>
+        <p class="filter-count" role="status" aria-live="polite" data-filter-count></p>
+        <div class="project-grid" data-projects></div>
+        <p class="empty-state" data-empty hidden>Aucun projet dans cette catégorie pour le moment. Choisissez « Tous » pour tout afficher.</p>
+      </div>
+    </section>
+
+    <section id="initiatives" class="section section-alt">
+      <div class="container">
+        <h2>Entrepreneuriat et initiatives</h2>
+        <div class="initiatives" data-initiatives></div>
+      </div>
+    </section>
+
+    <section id="competences" class="section">
+      <div class="container">
+        <h2>Compétences</h2>
+        <div class="skills" data-skills></div>
+
+        <h3 class="languages-heading">Langues</h3>
+        <div class="languages-grid" data-languages></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-alt">
+      <div class="container contact-grid">
+        <div>
+          <h2>Contact</h2>
+          <p class="contact-intro">Une opportunité, une question technique ou un projet à construire ? Écrivez-moi.</p>
+          <ul class="contact-links">
+            <li><a href="#" data-link="email">raphaelnadal963@gmail.com</a></li>
+            <li><a href="#" data-link="https://www.linkedin.com/in/nadal-ngaki-998344322/" target="_blank" rel="noopener noreferrer">LinkedIn — Nadal NGAKI MUPATI</a></li>
+            <li><a href="#" data-link="github" target="_blank" rel="noopener noreferrer">GitHub — nadal243</a></li>
+            <li><span>📍 Paris et Metz</span></li>
+          </ul>
+        </div>
+        <form class="contact-form" novalidate data-form>
+          <div class="field">
+            <label for="f-name">Nom</label>
+            <input id="f-name" name="name" type="text" autocomplete="family-name" required aria-describedby="e-name">
+            <p class="field-error" id="e-name" data-error></p>
+          </div>
+          <div class="field">
+            <label for="f-first-name">Prénom</label>
+            <input id="f-first-name" name="first-name" type="text" autocomplete="given-name" required aria-describedby="e-first-name">
+            <p class="field-error" id="e-first-name" data-error></p>
+          </div>
+          <div class="field">
+            <label for="f-email">Adresse e-mail</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
+            <p class="field-error" id="e-email" data-error></p>
+          </div>
+          <div class="field">
+            <label for="f-subject">Sujet</label>
+            <input id="f-subject" name="subject" type="text" required aria-describedby="e-subject">
+            <p class="field-error" id="e-subject" data-error></p>
+          </div>
+          <div class="field">
+            <label for="f-message">Message</label>
+            <textarea id="f-message" name="message" rows="5" required aria-describedby="e-message"></textarea>
+            <p class="field-error" id="e-message" data-error></p>
+          </div>
+          <button class="btn" type="submit" data-submit>Préparer l'e-mail</button>
+          <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span data-year></span> <span data-fullname>Nadal NGAKI</span></p>
+      <ul class="social-links">
+        <li><a href="#" data-link="github" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="#" data-link="linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="#top">Haut de page</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Fiche projet détaillée -->
+  <dialog class="project-dialog" aria-labelledby="dlg-title" data-dialog>
+    <div class="dialog-head">
+      <h3 id="dlg-title" data-dialog-title></h3>
+      <button class="btn btn-ghost btn-small" type="button" data-dialog-close>Fermer</button>
+    </div>
+    <div class="dialog-body" data-dialog-body></div>
+  </dialog>
+</body>
+</html>
