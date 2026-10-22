@@ -148,7 +148,8 @@ const PROJECTS = [
 const INITIATIVES = [
   {
     title: "OptiStock — Plateforme web de gestion de stock",
-    text: "Co-fondation et réalisation d'une solution applicative complète (React, Supabase, JavaScript, HTML/CSS). Développement de la logique produit, gestion de projet agile, structuration de la méthodologie de travail et mise en œuvre des leviers d'acquisition marketing.",
+    text: "Développeur et cofondateur d'une solution applicative complète (React, Supabase, JavaScript, HTML/CSS). Développement de la logique produit, gestion de projet agile, structuration de la méthodologie de travail et mise en œuvre des leviers d'acquisition marketing.",
+    url: "https://optistock.stellarbrightsoftware.com/",
   },
   {
     title: "OCTAVE (Organisme de Création Technologique et Aérospatiale d'Évry)",
@@ -188,13 +189,24 @@ const LANGUAGES = [
   },
 ];
 
-const BOOT_LINES = [
-  "[ 0.000] boot: reset cause = power-on",
-  "[ 0.012] clk: PLL locked",
-  "[ 0.031] uart0: 115200 8N1 <span class=\"ok\">ok</span>",
-  "[ 0.058] can0: 500 kbit/s <span class=\"ok\">ok</span>",
-  "[ 0.090] i2c1: 3 devices found",
-  "[ 0.140] portfolio: ready",
+const CODE_LINES = [
+  "<span class=\"ok\">#include</span> &lt;stdint.h&gt;",
+  "",
+  "<span class=\"ok\">#define</span> SAMPLE_COUNT 8U",
+  "",
+  "<span class=\"ok\">static uint16_t</span> read_sensor(void)",
+  "{",
+  "    uint16_t value = adc_read();",
+  "    return value;",
+  "}",
+  "",
+  "<span class=\"ok\">int</span> main(void)",
+  "{",
+  "    hardware_init();",
+  "    <span class=\"ok\">while</span> (1) {",
+  "        log_sensor(read_sensor());",
+  "    }",
+  "}",
 ];
 
 /* ---------- 2. RENDU ---------- */
@@ -291,8 +303,20 @@ function renderProjects() {
 function renderInitiatives() {
   const box = $("[data-initiatives]");
   if (!INITIATIVES.length) { box.append(el("p", { class: "empty-state", text: "Les initiatives et prototypes seront présentés ici." })); return; }
-  INITIATIVES.forEach(i => box.append(el("article", { class: "edu-item" },
-    el("h3", { text: i.title }), i.demo ? demoBadge() : null, el("p", { text: i.text }))));
+  INITIATIVES.forEach(i => {
+    const card = el("article", { class: "edu-item" },
+      el("h3", { text: i.title }), i.demo ? demoBadge() : null, el("p", { text: i.text }));
+    if (i.url) {
+      card.append(el("a", {
+        class: "btn btn-small",
+        href: i.url,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        text: "Visiter le site OptiStock",
+      }));
+    }
+    box.append(card);
+  });
 }
 
 function renderSkills() {
@@ -356,12 +380,19 @@ function initNav() {
 
 function initTerminal() {
   const out = $("[data-terminal]");
-  if (reducedMotion) { out.innerHTML = BOOT_LINES.join("\n"); return; }
+  if (reducedMotion) { out.innerHTML = CODE_LINES.join("\n"); return; }
   let i = 0;
   out.classList.add("cursor");
   const next = () => {
-    if (i >= BOOT_LINES.length) return;
-    out.innerHTML = BOOT_LINES.slice(0, ++i).join("\n");
+    if (i >= CODE_LINES.length) {
+      setTimeout(() => {
+        i = 0;
+        out.innerHTML = "";
+        next();
+      }, 1400);
+      return;
+    }
+    out.innerHTML = CODE_LINES.slice(0, ++i).join("\n");
     setTimeout(next, 380);
   };
   next();
@@ -382,22 +413,15 @@ function initDialog() {
   dialog.addEventListener("click", e => { if (e.target === dialog) dialog.close(); }); // clic sur le fond
 }
 
-/** Téléchargement du CV : signale clairement l'absence du fichier. */
+/** Informe les visiteurs que le CV n'est pas encore disponible. */
 function initCv() {
   const status = $("[data-cv-status]");
-  $$("[data-cv]").forEach(a => {
-    a.setAttribute("href", CONFIG.cvPath);
-    a.addEventListener("click", async e => {
-      if (location.protocol === "file:") return;           // fetch impossible en local : comportement natif
-      e.preventDefault();
-      try {
-        const r = await fetch(CONFIG.cvPath, { method: "HEAD" });
-        if (!r.ok) throw new Error("absent");
-        const tmp = el("a", { href: CONFIG.cvPath, download: "" });
-        document.body.append(tmp); tmp.click(); tmp.remove(); status.textContent = "";
-      } catch {
-        status.textContent = `Le fichier ${CONFIG.cvPath} est introuvable : ajoutez votre CV dans le dossier assets/.`;
-      }
+  let timeout;
+  $$("[data-cv]").forEach(button => {
+    button.addEventListener("click", () => {
+      status.textContent = "Mon CV sera bientôt disponible.";
+      clearTimeout(timeout);
+      timeout = setTimeout(() => { status.textContent = ""; }, 5000);
     });
   });
 }
@@ -595,6 +619,6 @@ function initBackground() {
 
 /* ---------- Initialisation ---------- */
 document.addEventListener("DOMContentLoaded", () => {
-  renderExperiences(); renderEducation(); renderFilters(); renderProjects(); renderInitiatives(); renderSkills(); renderLanguages();
+  renderExperiences(); renderEducation(); renderInitiatives(); renderSkills(); renderLanguages();
   applyConfig(); initNav(); initTerminal(); initDialog(); initCv(); initForm(); initBackground();
 });

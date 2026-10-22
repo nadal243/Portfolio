@@ -85,10 +85,12 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 .hero { padding: var(--space-5) 0 var(--space-4); }
 .hero-grid { display: grid; gap: var(--space-4); align-items: center; }
 .hero-context { font: 500 .85rem var(--font-mono); color: var(--accent); margin: 0 0 var(--space-2); }
-.hero-title { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 500; margin: var(--space-2) 0; }
+.hero-title { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 500; margin: var(--space-2) 0; animation: title-enter .8s ease-out both; }
+@keyframes title-enter { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: translateX(0); } }
 .hero-pitch { color: var(--muted); max-width: 56ch; margin: 0 0 var(--space-3); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .cv-status { min-height: 1.5em; color: var(--amber); font-size: .9rem; margin: var(--space-1) 0 0; }
+.cv-status:not(:empty) { position: fixed; z-index: 100; left: 50%; bottom: 1.5rem; transform: translateX(-50%); width: max-content; max-width: calc(100% - 2rem); padding: .7rem 1rem; border: 1px solid var(--amber); border-radius: var(--radius); background: var(--surface); box-shadow: 0 8px 28px rgba(0, 0, 0, .35); text-align: center; }
 .social-links { display: flex; gap: var(--space-3); list-style: none; padding: 0; margin: var(--space-2) 0 0; }
 
 /* Moniteur série */
