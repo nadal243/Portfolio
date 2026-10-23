@@ -116,6 +116,7 @@ const EDUCATION = [
     degree: "Python : des fondamentaux aux concepts avancés du langage",
     dates: "2026",
     text: "Certification attestant la maîtrise avancée du langage Python : programmation orientée objet (POO), traitement et manipulation de données, scripts d'automatisation et analyse de signaux de capteurs.",
+    url: "https://openbadgefactory.com/v1/assertion/1e73a324eba5f9083977c6c28a57048961dadb20",
   },
 ];
 
@@ -245,12 +246,24 @@ function renderExperiences() {
 
 function renderEducation() {
   const box = $("[data-education]");
-  EDUCATION.forEach(e => box.append(el("article", { class: "edu-item" },
-    el("h3", { text: e.school }),
-    el("p", { class: "meta", text: `${e.degree} · ${e.dates}` }),
-    e.demo ? demoBadge() : null,
-    el("p", { text: e.text }),
-  )));
+  EDUCATION.forEach(e => {
+    const item = el("article", { class: "edu-item" },
+      el("h3", { text: e.school }),
+      el("p", { class: "meta", text: `${e.degree} · ${e.dates}` }),
+      e.demo ? demoBadge() : null,
+      el("p", { text: e.text }),
+    );
+    if (e.url) {
+      item.append(el("a", {
+        class: "btn btn-small",
+        href: e.url,
+        target: "_blank",
+        rel: "noopener noreferrer",
+        text: "Voir la certification",
+      }));
+    }
+    box.append(item);
+  });
 }
 
 /** Petite illustration SVG générée par catégorie (remplaçable par une vraie image). */
